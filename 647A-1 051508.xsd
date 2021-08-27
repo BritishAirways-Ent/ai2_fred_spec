@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ARINC 674A-1 Changes -->
+<xs:schema xmlns:fred="www.aviation-ia.com/aeec/SupportFiles/647a-1/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="www.aviation-ia.com/aeec/SupportFiles/647a-1/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <!-- ######################################################################################################### -->
+    <!-- Start of FRED Data Element Data Type Definitions                                                          -->
+    <!-- ######################################################################################################### -->
+    <!--    This part of the schema was developed from the Section 1.7.3 Element Data Type Definitions -->
+    <!-- FRED data type "Text" is the same as XML simple data type xs:string -->
+    <!-- FRED data type "Constrained Text" is the same as XML simple data type xs:string with additional constraints -->
+    <!--         defined in the FRED data element definitions.  Other xs:string based data types may be used if their constraints match that -->
+    <!--         of the FRED data element. -->
+    <!-- FRED data type "Text List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the xs:string data type. -->
+    <!-- FRED data type "Enumerated" should be removed from the definitions.  There are no FRED elements with an enumerated data type. -->
+    <!-- FRED data type "Integer" is the same as XML simple data type xs:integer -->
+    <!-- FRED data type "Integer List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the xs:integer data type. -->
+    <!-- FRED data type "Integer Range". -->
+    <xs:complexType name="IntRange">
+        <xs:sequence>
+            <xs:element name="IntRange_Start" type="xs:nonNegativeInteger"/>
+            <xs:element name="IntRange_End" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- Added this to validate ranges that must start at 1 -->
+    <xs:complexType name="OneBasedIntRange">
+        <xs:sequence>
+            <xs:element name="OneBasedIntRange_Start" type="xs:positiveInteger"/>
+            <xs:element name="OneBasedIntRange_End" type="xs:positiveInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- FRED data type "Integer Range List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the IntRange data type. -->
+    <!-- FRED data type "Integer-Real Pair". -->
+    <xs:complexType name="IntRealPair">
+        <xs:simpleContent>
+            <xs:extension base="xs:double">
+                <xs:attribute name="index" type="xs:nonNegativeInteger" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- FRED data type "Integer-Real List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the IntRealPair data type. -->
+    <!-- FRED data type "Real" is the same as XML simple data type xs:double. -->
+    <!-- FRED data type "Real List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the xs:double data type. -->
+    <!-- FRED data type "Real Range". -->
+    <xs:complexType name="RealRange">
+        <xs:sequence>
+            <xs:element name="RealRange_Start" type="xs:double"/>
+            <xs:element name="RealRange_End" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- FRED data type "Real-Real Pair". -->
+    <xs:complexType name="RealRealPair">
+        <xs:simpleContent>
+            <xs:extension base="xs:double">
+                <xs:attribute name="real_index" type="xs:double" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- FRED data type "Real-Real List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the RealRealPair data type. -->
+    <!-- FRED data type "Binary".  Restrictions on number of digits should be done at the FRED data element level. -->
+    <xs:simpleType name="Binary">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:pattern value="[01]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- FRED data type "Binary List" does not need to be defined as it will be replaced with an XML element for each item in -->
+    <!--         the list and the FRED data element will become a container for a grouping of XML elements of the Binary data type. -->
+    <!-- FRED data type "DateTime" is the same as XML simple data type xs:date:time. -->
+    <!-- FRED data type "Integer Fraction". -->
+    <xs:complexType name="IntFraction">
+        <xs:sequence>
+            <xs:element name="Numerator" type="xs:positiveInteger"/>
+            <xs:element name="Denominator" type="xs:positiveInteger" default="1" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!-- FRED data type "Range-Text Pair". -->
+    <xs:complexType name="RangeTextPair">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="min" type="xs:double" use="required"/>
+                <xs:attribute name="max" type="xs:double" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <!-- The "Hex" data types is defined to use in cases where "Constained Text" elements have those restrictions. -->
+    <!--          Restrictions on number of digits should be done at the FRED data element level. -->
+    <xs:simpleType name="Hex">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:pattern value="[0-9A-F]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!-- ######################################################################################################### -->
+    <!-- End of FRED Data Element Data Type Definitions                                                            -->
+    <!-- ######################################################################################################### -->
+    <!-- ######################################################################################################### -->
+    <!-- Start of FRED Data Element Definitions                                                                    -->
+    <!-- ######################################################################################################### -->
+    <!-- This part of the schema was developed from Sections 2.2 - 2.4 and 3.2 - 3.4  and only covers data elements not structure elements. -->
+    <!-- Reference section numbers provided in the comments below are of the form X.#.#.  Where X can be replaced with either 2 or 3. -->
+    <!-- For example X.2.1 means the element is referenced in sections 2.2.1 and 3.2.1 of the FRED specification. -->
+    <!-- ***** X.2.1. ARINC Version -->
+    <xs:element name="ARINC_Version">
+        <xs:simpleType>
+            <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="647A-1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.2. FRED File Revision -->
+    <xs:element name="File_Revision">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="128"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.3 File Modification Date and Time -->
+    <xs:element name="File_Date" type="xs:dateTime"/>
+    <!-- ***** X.2.4. Aircraft Manufacturer and Model(s) -->
+    <xs:element name="Aircraft_Make_and_Model">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="512"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.5. Aircraft Registration Number(s) -->
+    <xs:element name="Aircraft_Registration">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="8192"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.6. Alternate Aircraft Identification(s) -->
+    <xs:element name="Aircraft_Alternate_ID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="8192"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.7. Aircraft Serial Number(s) -->
+    <xs:element name="Aircraft_Serial_Number">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="8192"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.8. Recorder Make and Part Number(s) -->
+    <xs:element name="Recorder_Make_and_Part_Number">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="512"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.9. FDAU Make and Part Number(s) -->
+    <xs:element name="FDAU_Make_and_Part_Number">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="512"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.10. Source Documents -->
+    <xs:element name="Source_Document">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="512"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.11 Default Sign Convention -->
+    <xs:element name="Default_Sign_Convention">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="CRT+"/>
+                <xs:enumeration value="Etkin"/>
+                <xs:enumeration value="Other"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.2.12. File Comments -->
+    <xs:element name="File_Comments">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="8192"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.3.1. Bits per Word -->
+    <xs:element name="Bits_Per_Word">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:maxInclusive value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.3.2. FDR Words per Subframe -->
+    <xs:element name="Words_Per_Subframe">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:minInclusive value="2"/>
+                <xs:maxInclusive value="9999"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.3.3. Seconds per Subframe -->
+    <xs:element name="Seconds_Per_Subframe" type="fred:IntFraction"/>
+    <!-- ***** X.3.4. Subframes per Frame -->
+    <xs:element name="Subframes_Per_Frame">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:maxInclusive value="99"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.3.5. Sync Pattern Sequence -->
+    <!--    Because Sync Pattern is a list we need to define 2 elements in this section, the item element (Sync_Code) and the list element (Sync_Pattern). -->
+    <xs:element name="Sync_Pattern">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Sync_Code" type="fred:Binary" maxOccurs="32"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Sync Codes within a Subframe Section -->
+        <xs:unique name="syncCode">
+            <xs:selector xpath="fred:Sync_Code"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.4.1.1.Recorder File Name -->
+    <xs:element name="Recorder_File_Name">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+                <xs:pattern value="[a-zA-Z0-9\-+_]+( [a-zA-Z0-9\-+_]+)*"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.4.1.2. Recorder File Size -->
+    <xs:element name="Recorder_File_Size" type="xs:positiveInteger"/>
+    <!-- ***** X.4.1.3. Frame List -->
+    <!--    Because Frame List is a list we need to define 2 elements in this section, the item element (Frame_Title_Ref) and the list element (Frame_List). -->
+    <xs:element name="Frame_List">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Frame_Title_Ref" type="xs:token" maxOccurs="255"/>
+                <!-- Restrictions for the uniqueness of Frame_Title_Ref are handled by the requirment that it match a Frame_Title element -->
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Frame_Title_Ref values within a Frame_List -->
+        <xs:unique name="frameRefList">
+            <xs:selector xpath="fred:Frame_Title_Ref"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.4.2.1. Frame ID -->
+    <xs:element name="Frame_ID">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:maxInclusive value="255"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.4.2.2. Frame Title -->
+    <xs:element name="Frame_Title">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="80"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.4.2.3. Frame Recording Type -->
+    <xs:element name="Frame_Type">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="9"/>
+                <xs:enumeration value="Scheduled"/>
+                <xs:enumeration value="Event"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.4.2.4.  Frame Recording Rate -->
+    <xs:element name="Recording_Rate" type="fred:IntFraction"/>
+    <!-- ***** X.4.2.5. Frame Recording Phase -->
+    <xs:element name="Recording_Phase" type="xs:nonNegativeInteger"/>
+    <!-- ***** X.4.2.6. Frame Event Condition -->
+    <xs:element name="Event_Condition">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="256"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.4.2.7. Frame Parameter List -->
+    <!--    Because Frame Parameter List is a list we need to define 2 elements in this section, the item element (Name_Ref) and the list element (Parameter_List). -->
+    <xs:element name="Parameter_List">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name_Ref" type="xs:string" maxOccurs="8192"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Frame_Title_Ref values within a Frame_List -->
+        <xs:unique name="nameRefList">
+            <xs:selector xpath="fred:Name_Ref"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.4.2.8. Comments -->
+    <xs:element name="Frame_Comments">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="1024"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.1. (Parameter) Name -->
+    <xs:element name="Name">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+                <xs:pattern value="[a-zA-Z0-9\-+_]+( [a-zA-Z0-9\-+_]+)*"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.2. Mnemonic Code -->
+    <xs:element name="Mnemonic_Code">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="12"/>
+                <xs:pattern value="[0-9a-zA-Z\._]+"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.3. Additional ID -->
+    <xs:element name="Additional_ID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.4. Modification Date -->
+    <xs:element name="Modification_Date" type="xs:dateTime"/>
+    <!-- ***** X.5.5. Comments -->
+    <xs:element name="Comments">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="1024"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.6. Units -->
+    <xs:element name="Units">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="8"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.7. Sign Convention -->
+    <xs:element name="Sign_Convention">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.8.1. Word Number(s) -->
+    <!--    Because Word Number is a list we need to define 2 elements in this section, the item element (Word_Num) and the list element (Word_Numbers). -->
+    <xs:element name="Word_Numbers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Word_Num" type="xs:positiveInteger" maxOccurs="32"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Word Numbers within a Word Number List -->
+        <xs:unique name="wordNum">
+            <xs:selector xpath="fred:Word_Num"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.8.2. Subframe Number(s) -->
+    <!--    Because Subframe Number is a list we need to define 2 elements in this section, the item element (Subframe_Num) and the list element (Subframe_Numbers). -->
+    <xs:element name="Subframe_Numbers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Subframe_Num" type="xs:positiveInteger" maxOccurs="32"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Subframe Numbers within a Subframe Number List -->
+        <xs:unique name="subframeNum">
+            <xs:selector xpath="fred:Subframe_Num"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.8.3. Bits -->
+    <xs:element name="Bits" type="fred:OneBasedIntRange"/>
+    <!-- ***** X.5.8.4. Overlap Bits -->
+    <xs:element name="Overlap_Bits" type="xs:positiveInteger"/>
+    <!-- ***** X.5.8.5. Superframe Parameter Name -->
+    <xs:element name="Superframe_Parameter" type="xs:string"/>
+    <!-- Additional restrictions on Superframe_Parameter are handled by the requirement that this element match a Name element in the file. -->
+    <!-- ***** X.5.8.6. Superframe Cycle Number(s) -->
+    <!--    Because Superframe Cycle Number is a list we need to define 2 elements in this section, the item element (Cycle_Num) and the list element (Superframe_Cycles). -->
+    <xs:element name="Superframe_Cycles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Cycle_Num" type="xs:nonNegativeInteger" maxOccurs="4"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Cycle Numbers within a Superframe Cycle Number List -->
+        <xs:unique name="cycleNum">
+            <xs:selector xpath="fred:Cycle_Num"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.8.7. Acquisition Time Offset -->
+    <xs:element name="Acquisition_Time_Offset" type="fred:IntFraction"/>
+    <!-- ***** X.5.9. Number of Bits -->
+    <xs:element name="Number_of_Bits">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:maxInclusive value="640"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.10.1. Raw Data Range -->
+    <xs:element name="Raw_Range" type="fred:IntRange"/>
+    <!-- *****X.5.10.2. Correlation Coefficient-->
+    <xs:element name="Correlation_Coeff">
+        <xs:simpleType>
+            <xs:restriction base="xs:double">
+                <xs:minExclusive value="0"/>
+                <xs:maxInclusive value="1.0"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.10.3. Data Type Conversion -->
+    <xs:element name="Data_Type">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="16"/>
+                <xs:enumeration value="Unsigned Binary"/>
+                <xs:enumeration value="Signed Binary"/>
+                <xs:enumeration value="BCD"/>
+                <xs:enumeration value="Floating Point"/>
+                <xs:enumeration value="ASCII"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.10.3.1. BCD Format -->
+    <xs:element name="BCD_Format">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="4"/>
+                <xs:pattern value="[1-4]+"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.10.4.1. Polynomial Coefficients -->
+    <!--    Because Polynomial Coefficients is a list we need to define 2 elements in this section, the item element (Coeff_Pair) and the list element (Poly_Coeff). -->
+    <xs:element name="Poly_Coeff">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Coeff_Pair" type="fred:IntRealPair" maxOccurs="8"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Coefficient Pair indexes (representing the order of the coefficient) within a Polynoimial Coefficient List -->
+        <xs:unique name="coeffPair">
+            <xs:selector xpath="fred:Coeff_Pair"/>
+            <xs:field xpath="@index"/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.10.4.2. Integer-Real Table -->
+    <!--    Because Integer-Real Table is a list we need to define 2 elements in this section, the item element (Integer_Real_Pair) and the list element (Integer_Real_Table). -->
+    <xs:element name="Integer_Real_Table">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Integer_Real_Pair" type="fred:IntRealPair" maxOccurs="64"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate values for the index (representing the integer in the Integer-Real Pair) within an Integer-Real Table list -->
+        <xs:unique name="Int-RealPair">
+            <xs:selector xpath="fred:Integer_Real_Pair"/>
+            <xs:field xpath="@index"/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.10.4.3. Real-Real Table -->
+    <!--    Because Real-Real Table is a list we need to define 2 elements in this section, the item element (Real_Real_Pair) and the list element (Real_Real_Table). -->
+    <xs:element name="Real_Real_Table">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Real_Real_Pair" type="fred:RealRealPair" maxOccurs="64"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate values for the real_index (representing the first real in the Real-Real Pair) within a Real-Real Table list -->
+        <xs:unique name="Real-RealPair">
+            <xs:selector xpath="fred:Real_Real_Pair"/>
+            <xs:field xpath="@real_index"/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.10.4.4. Predefined Equation -->
+    <xs:element name="Predefined_Equation">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="16"/>
+                <xs:enumeration value="Teledyne Synchro"/>
+                <xs:enumeration value="F1000 Synchro"/>
+                <xs:enumeration value="542 Airspeed"/>
+                <xs:enumeration value="542 Altitude"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.10.4.5. Conversion Description -->
+    <xs:element name="Conversion_Description">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="512"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.10.5.  Conversion to Text -->
+    <!--    Because Conversion to Text is a list we need to define 2 elements in this section, the item element (Range_Text_Pair) and the list element (Text_Conversion). -->
+    <xs:element name="Text_Conversion">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Range_Text_Pair" type="fred:RangeTextPair" maxOccurs="256"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate values for the minimum value of the range within a Text Conversion list -->
+        <xs:unique name="conv2Text">
+            <xs:selector xpath="fred:Range_Text_Pair"/>
+            <xs:field xpath="@min"/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.11. Operational Range -->
+    <xs:element name="Operational_Range" type="fred:RealRange"/>
+    <!-- ***** X.5.12. Accuracy -->
+    <xs:element name="Accuracy">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="128"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.13. Resolution -->
+    <xs:element name="Resolution" type="xs:double"/>
+    <!-- ***** X.5.14. Transport Delay -->
+    <xs:element name="Transport_Delay" type="fred:IntRange"/>
+    <!-- ***** X.5.15. Sensor Type -->
+    <xs:element name="Sensor_Type">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="32"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.16. Signal Type -->
+    <xs:element name="Signal_Type">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.17. Signal/Data Source -->
+    <xs:element name="Signal_Source">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="512"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.18.1. DITS Label -->
+    <xs:element name="DITS_Label">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="3"/>
+                <xs:maxLength value="3"/>
+                <xs:pattern value="(00[1-7])|(0[1-7][0-7])|([1-3][0-7][0-7])"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.18.2. DITS SDI -->
+    <xs:element name="DITS_SDI">
+        <xs:simpleType>
+            <xs:restriction base="fred:Binary">
+                <xs:minLength value="2"/>
+                <xs:maxLength value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.18.3. DITS Bit Range -->
+    <!--    Because DITS Bit Range is a list we need to define 2 elements in this section, the item element (DITS_Bit_Range) and the list element (DITS_Bits). -->
+    <xs:element name="DITS_Bits">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DITS_Bit_Range" type="fred:OneBasedIntRange" maxOccurs="3"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate DITS Bit Range pairs within a DITS Bits List -->
+        <xs:unique name="ditsBits">
+            <xs:selector xpath="fred:DITS_Bit_Range"/>
+            <xs:field xpath="fred:OneBasedIntRange_Start"/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.18.4. DITS Coding -->
+    <xs:element name="DITS_Coding">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="32"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.18.5. DITS Parameter Transmit Interval -->
+    <xs:element name="DITS_Transmit_Interval" type="xs:positiveInteger"/>
+    <!-- ***** X.5.19.1. AFDX Virtual Link Name -->
+    <xs:element name="AFDX_VLink_Name">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.19.2. AFDX UDP Address -->
+    <xs:element name="AFDX_UDP_Address">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="32"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.19.3. AFDX Data Set Identifier -->
+    <xs:element name="AFDX_Data_Set_ID">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="64"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.19.4. AFDX Datum Address -->
+    <xs:element name="AFDX_Datum_Address" type="xs:positiveInteger"/>
+    <!-- ***** X.5.19.5. AFDX Datum Functional Status Address -->
+    <xs:element name="AFDX_Datum_Func_Status_Address" type="xs:nonNegativeInteger"/>
+    <!-- ***** X.5.19.6. AFDX Bit Range -->
+    <xs:element name="AFDX_Bit_Range" type="fred:IntRange"/>
+    <!-- ***** X.5.19.7. AFDX Datum Format -->
+    <xs:element name="AFDX_Datum_Format">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="32"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.19.8. AFDX Datum Length -->
+    <xs:element name="AFDX_Datum_Length">
+        <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+                <xs:minInclusive value="32"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.19.9. AFDX Format Dependent Data Definition -->
+    <xs:element name="AFDX_Format_Dependent_Data">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="1024"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.19.10. AFDX Parameter Transmit Interval -->
+    <xs:element name="AFDX_Transmit_Interval" type="xs:positiveInteger"/>
+    <!-- ***** X.5.20.1. MTDB Label Word -->
+    <xs:element name="MTDB_Label">
+        <xs:simpleType>
+            <xs:restriction base="fred:Hex">
+                <xs:minLength value="3"/>
+                <xs:maxLength value="3"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.20.2. MTDB Label Extension -->
+    <xs:element name="MTDB_Label_Ext">
+        <xs:simpleType>
+            <xs:restriction base="fred:Hex">
+                <xs:minLength value="1"/>
+                <xs:maxLength value="1"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.20.3. MTDB Bit Range -->
+    <!--    Because MTDB Bit Range is a list we need to define 2 elements in this section, the item element (MTDB_Bit_Range) and the list element (MTDB_Bits). -->
+    <xs:element name="MTDB_Bits">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MTDB_Bit_Range" type="fred:IntRange" maxOccurs="3"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate DITS Bit Range pairs within a DITS Bits List -->
+        <xs:unique name="mtdbBits">
+            <xs:selector xpath="fred:MTDB_Bit_Range"/>
+            <xs:field xpath="fred:OneBasedIntRange_Start"/>
+        </xs:unique>
+    </xs:element>
+    <!-- ***** X.5.20.4. MTDB Coding -->
+    <xs:element name="MTDB_Coding">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="32"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- ***** X.5.20.5. MTDB Parameter Transmit Interval -->
+    <xs:element name="MTDB_Transmit_Interval" type="xs:positiveInteger"/>
+    <!-- ######################################################################################################### -->
+    <!-- End of FRED Data Element Definitions                                                                      -->
+    <!-- ######################################################################################################### -->
+    <!-- ######################################################################################################### -->
+    <!-- Start of FRED Structure Element Definitions                                                               -->
+    <!-- ######################################################################################################### -->
+    <!--    This part of the schema was developed from Sections 2.2 - 2.4 and 3.2 - 3.4  and only covers structure elements not data elements -->
+    <!-- ***** X.2 Header Section. -->
+    <xs:element name="Header">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:ARINC_Version"/>
+                <xs:element ref="fred:File_Revision"/>
+                <xs:element ref="fred:File_Date"/>
+                <xs:element ref="fred:Aircraft_Make_and_Model"/>
+                <xs:element ref="fred:Aircraft_Registration" minOccurs="0"/>
+                <xs:element ref="fred:Aircraft_Alternate_ID" minOccurs="0"/>
+                <xs:element ref="fred:Aircraft_Serial_Number" minOccurs="0"/>
+                <xs:element ref="fred:Recorder_Make_and_Part_Number" minOccurs="0"/>
+                <xs:element ref="fred:FDAU_Make_and_Part_Number" minOccurs="0"/>
+                <xs:element ref="fred:Source_Document"/>
+                <xs:element ref="fred:Default_Sign_Convention"/>
+                <xs:element ref="fred:File_Comments" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.3. Subframe Section Definition -->
+    <xs:element name="Subframe">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Bits_Per_Word"/>
+                <xs:element ref="fred:Words_Per_Subframe"/>
+                <xs:element ref="fred:Seconds_Per_Subframe"/>
+                <xs:element ref="fred:Subframes_Per_Frame"/>
+                <xs:element ref="fred:Sync_Pattern"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.4.1. File Section Definition -->
+    <xs:element name="Recorder_File">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Recorder_File_Name" minOccurs="0"/>
+                <xs:element ref="fred:Recorder_File_Size" minOccurs="0"/>
+                <xs:element ref="fred:Frame_List"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.4.2. Frame Section Definition -->
+    <xs:element name="Frame">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Frame_ID"/>
+                <xs:element ref="fred:Frame_Title"/>
+                <xs:element ref="fred:Frame_Type"/>
+                <xs:choice>
+                    <xs:sequence>
+                        <xs:element ref="fred:Recording_Rate"/>
+                        <xs:element ref="fred:Recording_Phase" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:element ref="fred:Event_Condition"/>
+                </xs:choice>
+                <xs:element ref="fred:Parameter_List"/>
+                <xs:element ref="fred:Frame_Comments" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5.8. Component Items -->
+    <xs:element name="Component">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Word_Numbers"/>
+                <xs:element ref="fred:Subframe_Numbers" maxOccurs="unbounded"/>
+                <xs:element ref="fred:Bits" maxOccurs="unbounded"/>
+                <xs:element ref="fred:Overlap_Bits" minOccurs="0"/>
+                <xs:element ref="fred:Superframe_Parameter" minOccurs="0"/>
+                <xs:element ref="fred:Superframe_Cycles" minOccurs="0"/>
+                <xs:element ref="fred:Acquisition_Time_Offset" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5.10.4. Conversion Items -->
+    <!-- Changed element name to Conversion_Step for clarity when viewing a file in text editor -->
+    <xs:element name="Conversion_Step">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="fred:Poly_Coeff"/>
+                <xs:element ref="fred:Integer_Real_Table"/>
+                <xs:element ref="fred:Real_Real_Table"/>
+                <xs:element ref="fred:Predefined_Equation"/>
+                <xs:element ref="fred:Conversion_Description"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5.10. Range Items -->
+    <xs:element name="Range">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Raw_Range"/>
+                <xs:element ref="fred:Correlation_Coeff" minOccurs="0"/>
+                <xs:element ref="fred:Data_Type"/>
+                <xs:element ref="fred:BCD_Format" minOccurs="0"/>
+                <xs:element ref="fred:Conversion_Step" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="fred:Text_Conversion" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5.18. DITS Items -->
+    <xs:element name="DITS_Info">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:DITS_Label"/>
+                <xs:element ref="fred:DITS_SDI" minOccurs="0"/>
+                <xs:element ref="fred:DITS_Bits"/>
+                <xs:element ref="fred:DITS_Coding" minOccurs="0"/>
+                <xs:element ref="fred:DITS_Transmit_Interval" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5.19. AFDX Items -->
+    <xs:element name="AFDX_Info">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:AFDX_VLink_Name" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_UDP_Address"/>
+                <xs:element ref="fred:AFDX_Data_Set_ID" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Datum_Address" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Datum_Func_Status_Address" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Bit_Range" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Datum_Format" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Datum_Length" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Format_Dependent_Data" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Transmit_Interval" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5.20. MTDB Items -->
+    <xs:element name="MTDB_Info">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:MTDB_Label"/>
+                <xs:element ref="fred:MTDB_Label_Ext" minOccurs="0"/>
+                <xs:element ref="fred:MTDB_Bits"/>
+                <xs:element ref="fred:MTDB_Coding" minOccurs="0"/>
+                <xs:element ref="fred:MTDB_Transmit_Interval" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** X.5. Parameter Section Definition -->
+    <!--    Need 2 definitions because the structure of 717 and 767 parameters are different -->
+    <!--    717 Type Parameter Definition -->
+    <xs:element name="Parameter717">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Name"/>
+                <xs:element ref="fred:Mnemonic_Code" minOccurs="0"/>
+                <xs:element ref="fred:Additional_ID" minOccurs="0"/>
+                <xs:element ref="fred:Modification_Date"/>
+                <xs:element ref="fred:Comments" minOccurs="0"/>
+                <xs:element ref="fred:Units" minOccurs="0"/>
+                <xs:element ref="fred:Sign_Convention" minOccurs="0"/>
+                <xs:element ref="fred:Component" maxOccurs="16"/>
+                <xs:element ref="fred:Range" maxOccurs="16"/>
+                <xs:element ref="fred:Operational_Range" minOccurs="0"/>
+                <xs:element ref="fred:Accuracy" minOccurs="0"/>
+                <xs:element ref="fred:Resolution" minOccurs="0"/>
+                <xs:element ref="fred:Transport_Delay" minOccurs="0"/>
+                <xs:element ref="fred:Sensor_Type" minOccurs="0"/>
+                <xs:element ref="fred:Signal_Type" minOccurs="0"/>
+                <xs:element ref="fred:Signal_Source" minOccurs="0"/>
+                <xs:element ref="fred:DITS_Info" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Info" minOccurs="0"/>
+                <xs:element ref="fred:MTDB_Info" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- 767 Type Parameter Definition -->
+    <xs:element name="Parameter767">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Name"/>
+                <xs:element ref="fred:Mnemonic_Code" minOccurs="0"/>
+                <xs:element ref="fred:Additional_ID" minOccurs="0"/>
+                <xs:element ref="fred:Modification_Date"/>
+                <xs:element ref="fred:Comments" minOccurs="0"/>
+                <xs:element ref="fred:Units" minOccurs="0"/>
+                <xs:element ref="fred:Sign_Convention" minOccurs="0"/>
+                <xs:element ref="fred:Number_of_Bits"/>
+                <xs:element ref="fred:Range" maxOccurs="16"/>
+                <xs:element ref="fred:Operational_Range" minOccurs="0"/>
+                <xs:element ref="fred:Accuracy" minOccurs="0"/>
+                <xs:element ref="fred:Resolution" minOccurs="0"/>
+                <xs:element ref="fred:Transport_Delay" minOccurs="0"/>
+                <xs:element ref="fred:Sensor_Type" minOccurs="0"/>
+                <xs:element ref="fred:Signal_Type" minOccurs="0"/>
+                <xs:element ref="fred:Signal_Source" minOccurs="0"/>
+                <xs:element ref="fred:DITS_Info" minOccurs="0"/>
+                <xs:element ref="fred:AFDX_Info" minOccurs="0"/>
+                <xs:element ref="fred:MTDB_Info" minOccurs="0"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <!-- ***** 3.1.12 Overall FRED File Structure -->
+    <!-- Definition for the 717 type FRED File -->
+    <xs:element name="FRED717">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Header"/>
+                <xs:element ref="fred:Subframe"/>
+                <xs:element ref="fred:Parameter717" maxOccurs="unbounded"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:key element ensures that we get no duplicate Name elements within a 717 FRED file -->
+        <xs:key name="param717Name">
+            <xs:selector xpath="fred:Parameter717/fred:Name"/>
+            <xs:field xpath="."/>
+        </xs:key>
+        <!-- The following xs:keyref element ensures that the Superframe Parameter in the Component element's matches a defined Parameter Name. -->
+        <xs:keyref name="superframeParam" refer="fred:param717Name">
+            <xs:selector xpath="fred:Parameter717/fred:Component/fred:Superframe_Parameter"/>
+            <xs:field xpath="."/>
+        </xs:keyref>
+        <!-- The following xs:unique element ensures that we get no duplicate Mnemonic_Code elements within a 717 FRED file -->
+        <xs:unique name="param717Mnemonic">
+            <xs:selector xpath="fred:Parameter717/fred:Mnemonic_Code"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- Definition for the 767 type of FRED File -->
+    <xs:element name="FRED767">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="fred:Header"/>
+                <xs:element ref="fred:Recorder_File"/>
+                <xs:element ref="fred:Frame" maxOccurs="unbounded"/>
+                <xs:element ref="fred:Parameter767" maxOccurs="unbounded"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <!-- The following xs:unique element ensures that we get no duplicate Frame IDs within a 767 FRED file -->
+        <xs:unique name="frameID">
+            <xs:selector xpath="fred:Frame/fred:Frame_ID"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+        <!-- The following xs:key element ensures that we get no duplicate Frame Titles. -->
+        <xs:key name="frameTitle">
+            <xs:selector xpath="fred:Frame"/>
+            <xs:field xpath="fred:Frame_Title"/>
+        </xs:key>
+        <!-- The following xs:keyref element ensures that all Frame Titles in the File element's Frame List are defined. -->
+        <xs:keyref name="frameRef" refer="fred:frameTitle">
+            <xs:selector xpath="fred:Recorder_File/fred:Frame_List/fred:Frame_Title_Ref"/>
+            <xs:field xpath="."/>
+        </xs:keyref>
+        <!-- The following xs:key element ensures that we get no duplicate Name elements within a 767 FRED file -->
+        <xs:key name="param767Name">
+            <xs:selector xpath="fred:Parameter767/fred:Name"/>
+            <xs:field xpath="."/>
+        </xs:key>
+        <!-- The following xs:keyref element ensures that all Parameter Names in the Frame element's Parameter List are defined. -->
+        <xs:keyref name="paramNameRef" refer="fred:param767Name">
+            <xs:selector xpath="fred:Frame/fred:Parameter_List/fred:Name_Ref"/>
+            <xs:field xpath="."/>
+        </xs:keyref>
+        <!-- The following xs:unique element ensures that we get no duplicate Mnemonic_Code elements within a 767 FRED file -->
+        <xs:unique name="param767Mnemonic">
+            <xs:selector xpath="fred:Parameter767/fred:Mnemonic_Code"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+    <!-- Definition for the basic FRED Structure -->
+    <xs:element name="FREDFile">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="fred:FRED717"/>
+                <xs:element ref="fred:FRED767"/>
+                <!-- The following xs:any element allows the insertion of any element from a namespace other than the targetNamespace of this file. -->
+                <xs:any namespace="##other" processContents="lax"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <!-- ######################################################################################################### -->
+    <!-- End of FRED Structure Element Definitions                                                                 -->
+    <!-- ######################################################################################################### -->
+</xs:schema>

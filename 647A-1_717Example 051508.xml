@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<FREDFile xmlns="http://www.aviation-ia.com/aeec/SupportFiles/647a-1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.aviation-ia.com/aeec/SupportFiles/647a-1/">
+    <FRED717>
+        <Header>
+            <ARINC_Version>647A-1</ARINC_Version>
+            <File_Revision>FRED 717-type demo file 7 - RGS</File_Revision>
+            <File_Date>2007-11-07T07:25:00</File_Date>
+            <Aircraft_Make_and_Model>GregCorp G919</Aircraft_Make_and_Model>
+            <Aircraft_Registration>N1234YZ, N5678AB</Aircraft_Registration>
+            <Aircraft_Alternate_ID>1234, 5678</Aircraft_Alternate_ID>
+            <Aircraft_Serial_Number>06-0001,06-0002</Aircraft_Serial_Number>
+            <Recorder_Make_and_Part_Number>L3 FA2100-4042-00</Recorder_Make_and_Part_Number>
+            <FDAU_Make_and_Part_Number>Honeywell hardware 967-0212-002 software 998-1111-511</FDAU_Make_and_Part_Number>
+            <Source_Document>GregCorp Engineering Report 123456 Rev B</Source_Document>
+            <Default_Sign_Convention>CRT+</Default_Sign_Convention>
+            <File_Comments>This is an example of a 717-type FRED file created by Greg Smith.  It contains all the elements defined in ARINC 647A-1 that this file type is allowed to contain.  Note that this example is more about showing all the options of a 717 FRED file than a typical aircraft configuration.</File_Comments>
+        </Header>
+        <Subframe>
+            <Bits_Per_Word>12</Bits_Per_Word>
+            <Words_Per_Subframe>64</Words_Per_Subframe>
+            <Seconds_Per_Subframe>
+                <Numerator>60</Numerator>
+                <Denominator>61</Denominator>
+            </Seconds_Per_Subframe>
+            <Subframes_Per_Frame>4</Subframes_Per_Frame>
+            <Sync_Pattern>
+                <Sync_Code>001001000111</Sync_Code>
+                <Sync_Code>010110111000</Sync_Code>
+                <Sync_Code>101001000111</Sync_Code>
+                <Sync_Code>110110111000</Sync_Code>
+            </Sync_Pattern>
+        </Subframe>
+        <Parameter717>
+            <Name>Altitude Press-L</Name>
+            <Mnemonic_Code>ALTPRL</Mnemonic_Code>
+            <Additional_ID>M02</Additional_ID>
+            <Modification_Date>2006-03-13T13:07:00-05:00</Modification_Date>
+            <Comments>This parameter is aquired from 1  16-bit sample and split into 2 words with 1 overlap bit for storage in the FDR.</Comments>
+            <Units>ft</Units>
+            <Sign_Convention>Negative values are below MSL</Sign_Convention>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>59</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                    <Subframe_Num>2</Subframe_Num>
+                    <Subframe_Num>3</Subframe_Num>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+                <Acquisition_Time_Offset>
+                    <Numerator>27</Numerator>
+                    <Denominator>64</Denominator>
+                </Acquisition_Time_Offset>
+            </Component>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>58</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                    <Subframe_Num>2</Subframe_Num>
+                    <Subframe_Num>3</Subframe_Num>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>5</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+                <Overlap_Bits>1</Overlap_Bits>
+                <Acquisition_Time_Offset>
+                    <Numerator>26</Numerator>
+                    <Denominator>64</Denominator>
+                </Acquisition_Time_Offset>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>65535</IntRange_End>
+                </Raw_Range>
+                <Correlation_Coeff>1</Correlation_Coeff>
+                <Data_Type>Signed Binary</Data_Type>
+                <Conversion_Step>
+                    <Poly_Coeff>
+                        <Coeff_Pair index="1">2.5</Coeff_Pair>
+                    </Poly_Coeff>
+                </Conversion_Step>
+            </Range>
+            <Operational_Range>
+                <RealRange_Start>-1500.0</RealRange_Start>
+                <RealRange_End>80000.0</RealRange_End>
+            </Operational_Range>
+            <Accuracy>Below 10000 ft = +/- 20 ft; 10000 - 30000 ft = +/- 25 ft; Above 30000 ft = +/-30 ft</Accuracy>
+            <Resolution>2.5</Resolution>
+            <Transport_Delay>
+                <IntRange_Start>200</IntRange_Start>
+                <IntRange_End>450</IntRange_End>
+            </Transport_Delay>
+            <Sensor_Type>Pneumatic</Sensor_Type>
+            <Signal_Type>Digital Data</Signal_Type>
+            <Signal_Source>ADC1</Signal_Source>
+            <DITS_Info>
+                <DITS_Label>001</DITS_Label>
+                <DITS_SDI>10</DITS_SDI>
+                <DITS_Bits>
+                    <DITS_Bit_Range>
+                        <OneBasedIntRange_Start>17</OneBasedIntRange_Start>
+                        <OneBasedIntRange_End>19</OneBasedIntRange_End>
+                    </DITS_Bit_Range>
+                    <DITS_Bit_Range>
+                        <OneBasedIntRange_Start>21</OneBasedIntRange_Start>
+                        <OneBasedIntRange_End>27</OneBasedIntRange_End>
+                    </DITS_Bit_Range>
+                    <DITS_Bit_Range>
+                        <OneBasedIntRange_Start>29</OneBasedIntRange_Start>
+                        <OneBasedIntRange_End>29</OneBasedIntRange_End>
+                    </DITS_Bit_Range>
+                </DITS_Bits>
+                <DITS_Coding>Binary</DITS_Coding>
+                <DITS_Transmit_Interval>5</DITS_Transmit_Interval>
+            </DITS_Info>
+        </Parameter717>
+        <Parameter717>
+            <Name>Airspeed</Name>
+            <Modification_Date>2006-03-13T13:37:00-05:00</Modification_Date>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>10</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                    <Subframe_Num>2</Subframe_Num>
+                    <Subframe_Num>3</Subframe_Num>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>4095</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Unsigned Binary</Data_Type>
+                <Conversion_Step>
+                    <Poly_Coeff>
+                        <Coeff_Pair index="1">0.5</Coeff_Pair>
+                    </Poly_Coeff>
+                </Conversion_Step>
+            </Range>
+            <MTDB_Info>
+                <MTDB_Label>FC2</MTDB_Label>
+                <MTDB_Label_Ext>3</MTDB_Label_Ext>
+                <MTDB_Bits>
+                    <MTDB_Bit_Range>
+                        <IntRange_Start>7</IntRange_Start>
+                        <IntRange_End>20</IntRange_End>
+                    </MTDB_Bit_Range>
+                </MTDB_Bits>
+                <MTDB_Coding>Binary</MTDB_Coding>
+                <MTDB_Transmit_Interval>20</MTDB_Transmit_Interval>
+            </MTDB_Info>
+        </Parameter717>
+        <Parameter717>
+            <Name>Time UTC-Min</Name>
+            <Modification_Date>2006-03-17T11:11:00-05:00</Modification_Date>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>34</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>7</OneBasedIntRange_End>
+                </Bits>
+                <Superframe_Parameter>Superframe Counter-1</Superframe_Parameter>
+                <Superframe_Cycles>
+                    <Cycle_Num>1</Cycle_Num>
+                    <Cycle_Num>9</Cycle_Num>
+                </Superframe_Cycles>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>127</IntRange_End>
+                </Raw_Range>
+                <Data_Type>BCD</Data_Type>
+                <BCD_Format>34</BCD_Format>
+            </Range>
+            <AFDX_Info>
+                <AFDX_VLink_Name>UTC Clock</AFDX_VLink_Name>
+                <AFDX_UDP_Address>192.168.3.2</AFDX_UDP_Address>
+                <AFDX_Data_Set_ID>UTC_Clock_Parameters</AFDX_Data_Set_ID>
+                <AFDX_Datum_Address>3</AFDX_Datum_Address>
+                <AFDX_Datum_Func_Status_Address>4</AFDX_Datum_Func_Status_Address>
+                <AFDX_Bit_Range>
+                    <IntRange_Start>23</IntRange_Start>
+                    <IntRange_End>29</IntRange_End>
+                </AFDX_Bit_Range>
+                <AFDX_Datum_Format>Integer</AFDX_Datum_Format>
+                <AFDX_Datum_Length>32</AFDX_Datum_Length>
+                <AFDX_Format_Dependent_Data>N/A For Integer Type</AFDX_Format_Dependent_Data>
+                <AFDX_Transmit_Interval>4000</AFDX_Transmit_Interval>
+            </AFDX_Info>
+        </Parameter717>
+        <Parameter717>
+            <Name>Superframe Counter-1</Name>
+            <Modification_Date>2006-03-17T09:00:00-05:00</Modification_Date>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>27</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>9</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>15</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Unsigned Binary</Data_Type>
+            </Range>
+         </Parameter717>
+        <Parameter717>
+            <Name>Rudder Ped Pos</Name>
+            <Modification_Date>2006-03-14T07:23:00-05:00</Modification_Date>
+            <Units>deg</Units>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>15</Word_Num>
+                    <Word_Num>63</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                    <Subframe_Num>3</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>4095</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Signed Binary</Data_Type>
+                <Conversion_Step>
+                    <Predefined_Equation>Teledyne Synchro</Predefined_Equation>
+                </Conversion_Step>
+                <Conversion_Step>
+                    <Real_Real_Table>
+                        <Real_Real_Pair real_index="-99.22064">12.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="-73.19840">9.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="-48.31712">6.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="-24.03548">3.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="0">0</Real_Real_Pair>
+                        <Real_Real_Pair real_index="16.00928">-2.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="40.12936">-5.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="64.47440">-8.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="89.09380">-11.000</Real_Real_Pair>
+                        <Real_Real_Pair real_index="113.96666">-14.000</Real_Real_Pair>
+                    </Real_Real_Table>
+                </Conversion_Step>
+            </Range>
+        </Parameter717>
+        <Parameter717>
+            <Name>Control Column Position</Name>
+            <Modification_Date>2006-03-17T11:40:00-05:00</Modification_Date>
+            <Comments>This is an example of a parameter that uses an Integer-Real lookup table</Comments>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>3</Word_Num>
+                    <Word_Num>19</Word_Num>
+                    <Word_Num>35</Word_Num>
+                    <Word_Num>51</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                    <Subframe_Num>2</Subframe_Num>
+                    <Subframe_Num>3</Subframe_Num>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>8</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>255</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Unsigned Binary</Data_Type><Conversion_Step>
+                    <Integer_Real_Table>
+                        <Integer_Real_Pair index="0">-25.8</Integer_Real_Pair>
+                        <Integer_Real_Pair index="75">-5.2</Integer_Real_Pair>
+                        <Integer_Real_Pair index="115">0.0</Integer_Real_Pair>
+                        <Integer_Real_Pair index="160">7.6</Integer_Real_Pair>
+                        <Integer_Real_Pair index="255">29.3</Integer_Real_Pair>
+                    </Integer_Real_Table>
+                </Conversion_Step>
+            </Range>
+        </Parameter717>
+        <Parameter717>
+            <Name>Lateral Range</Name>
+            <Modification_Date>2006-03-17T11:51:00-05:00</Modification_Date>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>43</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>2</Subframe_Num>
+                    <Subframe_Num>4</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>4095</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Unsigned Binary</Data_Type>
+                <Conversion_Step>
+                    <Conversion_Description> Use the equation Param= (cnts) * A1
+                                                                 If MFD_1 is 0, A1 is 1
+                                                                 If MDF_1 is 1, A1 is 4.5
+                                                                 If MDF_1 is 2, A1 is 10
+                     </Conversion_Description>
+                </Conversion_Step>
+            </Range>
+        </Parameter717>
+        <Parameter717>
+            <Name>MFD_1</Name>
+            <Modification_Date>2006-03-17T14:34:00-05:00</Modification_Date>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>4</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>2</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>3</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Unsigned Binary</Data_Type>
+                <Text_Conversion>
+                    <Range_Text_Pair min="0" max="0">IRS 1</Range_Text_Pair>
+                    <Range_Text_Pair min="1" max="1">IRS 2</Range_Text_Pair>
+                    <Range_Text_Pair min="2" max="2">IRS 3</Range_Text_Pair>
+                    <Range_Text_Pair min="3" max="3">N/A</Range_Text_Pair>
+                </Text_Conversion>
+            </Range>
+        </Parameter717>
+        <Parameter717>
+            <Name>Radio Altitude</Name>
+            <Modification_Date>2007-11-07T07:25:00-05:00</Modification_Date>
+            <Comments>This parameter has 2 samples per frame, one in subframe 1, word 4, bits 1-10, and the second in subframe 3, word 7, bits 3-12.</Comments>
+            <Component>
+                <Word_Numbers>
+                    <Word_Num>4</Word_Num>
+                    <Word_Num>7</Word_Num>
+                </Word_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>1</Subframe_Num>
+                </Subframe_Numbers>
+                <Subframe_Numbers>
+                    <Subframe_Num>3</Subframe_Num>
+                </Subframe_Numbers>
+                <Bits>
+                    <OneBasedIntRange_Start>1</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>10</OneBasedIntRange_End>
+                </Bits>
+                <Bits>
+                    <OneBasedIntRange_Start>3</OneBasedIntRange_Start>
+                    <OneBasedIntRange_End>12</OneBasedIntRange_End>
+                </Bits>
+            </Component>
+            <Range>
+                <Raw_Range>
+                    <IntRange_Start>0</IntRange_Start>
+                    <IntRange_End>1024</IntRange_End>
+                </Raw_Range>
+                <Data_Type>Unsigned Binary</Data_Type>
+            </Range>
+        </Parameter717>
+    </FRED717>
+</FREDFile>

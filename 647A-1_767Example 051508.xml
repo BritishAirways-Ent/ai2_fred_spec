@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fred:FREDFile xmlns:fred="http://www.aviation-ia.com/aeec/SupportFiles/647a-1/" xmlns:smiths="FRED_Extension.smiths-aerospace.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="www.arinc.com/aeec/tech_app_bulletin/arinc_647A-1 647A-1.xsd">
+<!-- The line above gives a short name "fred" to the ARINC 674A-1 defined namespace with the attribute "xmlns:fred=...", therefore all elements defined -->
+<!--       in that namespace are prefixed with "fred:".  It also defines a second namespace containing extensions to the ARINC 647A-1 definitions with -->
+<!--       the "xmlns:smiths=..." attribute.  The elements from the extension namespace are all prefixed with "smiths:". -->
+    <fred:FRED767>
+        <fred:Header>
+            <fred:ARINC_Version>647A-1</fred:ARINC_Version>
+            <fred:File_Revision>FRED 767 type demo file 5 - RGS</fred:File_Revision>
+            <fred:File_Date>2007-11-07T08:41:00-05:00</fred:File_Date>
+            <fred:Aircraft_Make_and_Model>GregCorp G919</fred:Aircraft_Make_and_Model>
+            <fred:Aircraft_Registration>N1234YZ, N5678AB</fred:Aircraft_Registration>
+            <fred:Aircraft_Alternate_ID>1234, 5678</fred:Aircraft_Alternate_ID>
+            <fred:Aircraft_Serial_Number>06-0001,06-0002</fred:Aircraft_Serial_Number>
+            <fred:Recorder_Make_and_Part_Number>Smiths EAFR 174521-02-01</fred:Recorder_Make_and_Part_Number>
+            <fred:FDAU_Make_and_Part_Number>Smiths VFDAU 7E7-V.01</fred:FDAU_Make_and_Part_Number>
+            <fred:Source_Document>GregCorp Engineering Report 123456 Rev B</fred:Source_Document>
+            <fred:Default_Sign_Convention>Etkin</fred:Default_Sign_Convention>
+            <fred:File_Comments>This is a sample file of the 767 type of FRED File.  It contains every ARINC 647A-1 data element that is allowed for this type of file.  It also contains examples of user defined data elements for which the end user would have no schema.  Note that this example is more about showing all the options of a 767 FRED file than a typical aircraft configuration.</fred:File_Comments>
+            <smiths:User_Defined_Header_Element>This is an example of a user defined element for the Header section to demonstrate where it would be inserted.</smiths:User_Defined_Header_Element>
+        </fred:Header>
+        <fred:Recorder_File>
+            <fred:Recorder_File_Name>Mandatory FDR File</fred:Recorder_File_Name>
+            <fred:Recorder_File_Size>276480000</fred:Recorder_File_Size>
+            <fred:Frame_List>
+                <fred:Frame_Title_Ref>1 Hz Parameters</fred:Frame_Title_Ref>
+                <fred:Frame_Title_Ref>Rudder Exceedance Parameters</fred:Frame_Title_Ref>
+                <fred:Frame_Title_Ref>4 Hz Parameters</fred:Frame_Title_Ref>
+            </fred:Frame_List>
+            <smiths:User_Defined_Recorder_File_Element>This is an example of a user defined element for the Recorder File section to demonstrate where it would be inserted.</smiths:User_Defined_Recorder_File_Element>
+        </fred:Recorder_File>
+        <fred:Frame>
+            <fred:Frame_ID>1</fred:Frame_ID>
+            <fred:Frame_Title>1 Hz Parameters</fred:Frame_Title>
+            <fred:Frame_Type>Scheduled</fred:Frame_Type>
+            <fred:Recording_Rate>
+                <fred:Numerator>1</fred:Numerator>
+            </fred:Recording_Rate>
+            <fred:Recording_Phase>3</fred:Recording_Phase>
+            <fred:Parameter_List>
+                <fred:Name_Ref>Altitude Press</fred:Name_Ref>
+                <fred:Name_Ref>Airspeed Cal</fred:Name_Ref>
+                <fred:Name_Ref>Time UTC-Min</fred:Name_Ref>
+                <fred:Name_Ref>Some Nonlinear Parameter</fred:Name_Ref>
+                <fred:Name_Ref>Sample Conversion Description Parameter</fred:Name_Ref>
+                <fred:Name_Ref>MFD_1</fred:Name_Ref>
+            </fred:Parameter_List>
+            <fred:Frame_Comments>This is the first set of 1 Hz parameters</fred:Frame_Comments>
+            <smiths:User_Defined_Frame_Element>This is an example of a user defined element for the Frame section to demonstrate where it would be inserted.</smiths:User_Defined_Frame_Element>
+        </fred:Frame>
+        <fred:Frame>
+            <fred:Frame_ID>2</fred:Frame_ID>
+            <fred:Frame_Title>Rudder Exceedance Parameters</fred:Frame_Title>
+            <fred:Frame_Type>Event</fred:Frame_Type>
+            <fred:Event_Condition>Rudder exceeded 20 deg deflection to either side</fred:Event_Condition>
+            <fred:Parameter_List>
+                <fred:Name_Ref>Rudder Ped Pos</fred:Name_Ref>
+                <fred:Name_Ref>Rudder</fred:Name_Ref>
+            </fred:Parameter_List>
+        </fred:Frame>
+        <fred:Frame>
+            <fred:Frame_ID>3</fred:Frame_ID>
+            <fred:Frame_Title>4 Hz Parameters</fred:Frame_Title>
+            <fred:Frame_Type>Scheduled</fred:Frame_Type>
+            <fred:Recording_Rate>
+                <fred:Numerator>4</fred:Numerator>
+            </fred:Recording_Rate>
+            <fred:Parameter_List>
+                <fred:Name_Ref>Accel Lat</fred:Name_Ref>
+                <fred:Name_Ref>Accel Long</fred:Name_Ref>
+            </fred:Parameter_List>
+        </fred:Frame>
+        <fred:Parameter767>
+            <fred:Name>Altitude Press</fred:Name>
+            <fred:Mnemonic_Code>ALTPRESS</fred:Mnemonic_Code>
+            <fred:Additional_ID>100</fred:Additional_ID>
+            <fred:Modification_Date>2006-03-17T09:17:00-05:00</fred:Modification_Date>
+            <fred:Comments>Last modified by RGS of GregCorp</fred:Comments>
+            <fred:Units>ft</fred:Units>
+            <fred:Sign_Convention>Negative values are below Mean Sea Level</fred:Sign_Convention>
+            <fred:Number_of_Bits>16</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>65535</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Correlation_Coeff>0.999999992</fred:Correlation_Coeff>
+                <fred:Data_Type>Signed Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Poly_Coeff>
+                        <fred:Coeff_Pair index="1">2.5</fred:Coeff_Pair>
+                    </fred:Poly_Coeff>
+                </fred:Conversion_Step>
+                <smiths:User_Defined_Range_Element>This is an example of a user defined element for the Range section to demonstrate where it would be inserted.</smiths:User_Defined_Range_Element>
+            </fred:Range>
+            <fred:Operational_Range>
+                <fred:RealRange_Start>-1500.0</fred:RealRange_Start>
+                <fred:RealRange_End>80000.0</fred:RealRange_End>
+            </fred:Operational_Range>
+            <fred:Accuracy>Below 10000 ft = +/- 20 ft; 10000 - 30000 ft = +/- 25 ft; Above 30000 ft = +/-30 ft</fred:Accuracy>
+            <fred:Resolution>2.5</fred:Resolution>
+            <fred:Transport_Delay>
+                <fred:IntRange_Start>200</fred:IntRange_Start>
+                <fred:IntRange_End>450</fred:IntRange_End>
+            </fred:Transport_Delay>
+            <fred:Sensor_Type>Pneumatic</fred:Sensor_Type>
+            <fred:Signal_Type>Digital Data</fred:Signal_Type>
+            <fred:Signal_Source>ADC1</fred:Signal_Source><fred:DITS_Info>
+                <fred:DITS_Label>270</fred:DITS_Label>
+                <fred:DITS_SDI>10</fred:DITS_SDI>
+                <fred:DITS_Bits>
+                    <fred:DITS_Bit_Range>
+                        <fred:OneBasedIntRange_Start>17</fred:OneBasedIntRange_Start>
+                        <fred:OneBasedIntRange_End>19</fred:OneBasedIntRange_End>
+                    </fred:DITS_Bit_Range>
+                    <fred:DITS_Bit_Range>
+                        <fred:OneBasedIntRange_Start>21</fred:OneBasedIntRange_Start>
+                        <fred:OneBasedIntRange_End>27</fred:OneBasedIntRange_End>
+                    </fred:DITS_Bit_Range>
+                    <fred:DITS_Bit_Range>
+                        <fred:OneBasedIntRange_Start>29</fred:OneBasedIntRange_Start>
+                        <fred:OneBasedIntRange_End>29</fred:OneBasedIntRange_End>
+                    </fred:DITS_Bit_Range>
+                </fred:DITS_Bits>
+                <fred:DITS_Coding>Binary</fred:DITS_Coding>
+                <fred:DITS_Transmit_Interval>5</fred:DITS_Transmit_Interval>
+                <smiths:User_Defined_DITS_Element>This is an example of a user defined element for the DITS section to demonstrate where it would be inserted.</smiths:User_Defined_DITS_Element>
+            </fred:DITS_Info>
+            <smiths:User_Defined_Parameter_Element>This is an example of a user defined element for the Parameter section to demonstrate where it would be inserted.</smiths:User_Defined_Parameter_Element>
+            <smiths:Display_Format>F8.1</smiths:Display_Format>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Time UTC-Min</fred:Name>
+            <fred:Modification_Date>2006-03-17T11:11:00-05:00</fred:Modification_Date>
+            <fred:Number_of_Bits>7</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>127</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>BCD</fred:Data_Type>
+                <fred:BCD_Format>34</fred:BCD_Format>
+            </fred:Range>
+            <fred:AFDX_Info>
+                <fred:AFDX_VLink_Name>UTC Clock</fred:AFDX_VLink_Name>
+                <fred:AFDX_UDP_Address>192.168.3.2</fred:AFDX_UDP_Address>
+                <fred:AFDX_Data_Set_ID>UTC_Clock_Parameters</fred:AFDX_Data_Set_ID>
+                <fred:AFDX_Datum_Address>3</fred:AFDX_Datum_Address>
+                <fred:AFDX_Datum_Func_Status_Address>4</fred:AFDX_Datum_Func_Status_Address>
+                <fred:AFDX_Bit_Range>
+                    <fred:IntRange_Start>23</fred:IntRange_Start>
+                    <fred:IntRange_End>29</fred:IntRange_End>
+                </fred:AFDX_Bit_Range>
+                <fred:AFDX_Datum_Format>Integer</fred:AFDX_Datum_Format>
+                <fred:AFDX_Datum_Length>32</fred:AFDX_Datum_Length>
+                <fred:AFDX_Format_Dependent_Data>N/A For Integer Type</fred:AFDX_Format_Dependent_Data>
+                <fred:AFDX_Transmit_Interval>4000</fred:AFDX_Transmit_Interval>
+                <smiths:User_Defined_AFDX_Element>This is an example of a user defined element for the AFDX section to demonstrate where it would be inserted.</smiths:User_Defined_AFDX_Element>
+            </fred:AFDX_Info>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Airspeed Cal</fred:Name>
+            <fred:Mnemonic_Code>CAS</fred:Mnemonic_Code>
+            <fred:Additional_ID>103</fred:Additional_ID>
+            <fred:Modification_Date>2006-03-14T07:23:00-05:00</fred:Modification_Date>
+            <fred:Units>kts</fred:Units>
+            <fred:Number_of_Bits>14</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>16383</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Unsigned Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Poly_Coeff>
+                        <fred:Coeff_Pair index="0">0.15</fred:Coeff_Pair>
+                        <fred:Coeff_Pair index="1">0.03125</fred:Coeff_Pair>
+                    </fred:Poly_Coeff>
+                </fred:Conversion_Step>
+            </fred:Range>
+            <fred:Operational_Range>
+                <fred:RealRange_Start>0.0</fred:RealRange_Start>
+                <fred:RealRange_End>1000.0</fred:RealRange_End>
+            </fred:Operational_Range>
+            <fred:MTDB_Info>
+                <fred:MTDB_Label>FC2</fred:MTDB_Label>
+                <fred:MTDB_Label_Ext>3</fred:MTDB_Label_Ext>
+                <fred:MTDB_Bits>
+                    <fred:MTDB_Bit_Range>
+                        <fred:IntRange_Start>7</fred:IntRange_Start>
+                        <fred:IntRange_End>20</fred:IntRange_End>
+                    </fred:MTDB_Bit_Range>
+                </fred:MTDB_Bits>
+                <fred:MTDB_Coding>Binary</fred:MTDB_Coding>
+                <fred:MTDB_Transmit_Interval>20</fred:MTDB_Transmit_Interval>
+                <smiths:User_Defined_MTDB_Element>This is an example of a user defined element for the MTDB section to demonstrate where it would be inserted.</smiths:User_Defined_MTDB_Element>
+            </fred:MTDB_Info>
+            <smiths:Display_Format>F10.5</smiths:Display_Format>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Rudder Ped Pos</fred:Name>
+            <fred:Modification_Date>2006-03-14T07:23:00-05:00</fred:Modification_Date>
+            <fred:Units>deg</fred:Units>
+            <fred:Number_of_Bits>9</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>511</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Signed Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Predefined_Equation>Teledyne Synchro</fred:Predefined_Equation>
+                </fred:Conversion_Step>
+                <fred:Conversion_Step>
+                    <fred:Real_Real_Table>
+                        <fred:Real_Real_Pair real_index="-99.22064">12.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="-73.19840">9.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="-48.31712">6.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="-24.03548">3.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="0">0</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="16.00928">-2.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="40.12936">-5.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="64.47440">-8.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="89.09380">-11.000</fred:Real_Real_Pair>
+                        <fred:Real_Real_Pair real_index="113.96666">-14.000</fred:Real_Real_Pair>
+                    </fred:Real_Real_Table>
+                </fred:Conversion_Step>
+            </fred:Range>
+            <fred:Operational_Range>
+                <fred:RealRange_Start>-15</fred:RealRange_Start>
+                <fred:RealRange_End>15</fred:RealRange_End>
+            </fred:Operational_Range>
+            <smiths:Display_Format>F10.5</smiths:Display_Format>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Rudder</fred:Name>
+            <fred:Mnemonic_Code>RUDDER</fred:Mnemonic_Code>
+            <fred:Additional_ID>105</fred:Additional_ID>
+            <fred:Modification_Date>2006-03-14T07:23:00-05:00</fred:Modification_Date>
+            <fred:Units>deg</fred:Units>
+            <fred:Number_of_Bits>10</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>1023</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Signed Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Poly_Coeff>
+                        <fred:Coeff_Pair index="1">0.17578125</fred:Coeff_Pair>
+                    </fred:Poly_Coeff>
+                </fred:Conversion_Step>
+            </fred:Range>
+            <fred:Operational_Range>
+                <fred:RealRange_Start>-30.0</fred:RealRange_Start>
+                <fred:RealRange_End>30.0</fred:RealRange_End>
+            </fred:Operational_Range>
+            <smiths:Display_Format>F5.2</smiths:Display_Format>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Accel Lat</fred:Name>
+            <fred:Mnemonic_Code>Nx</fred:Mnemonic_Code>
+            <fred:Additional_ID>109</fred:Additional_ID>
+            <fred:Modification_Date>2006-03-14T07:23:00-05:00</fred:Modification_Date>
+            <fred:Units>g</fred:Units>
+            <fred:Number_of_Bits>12</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>4095</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Signed Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Poly_Coeff>
+                        <fred:Coeff_Pair index="1">9.766E-4</fred:Coeff_Pair>
+                    </fred:Poly_Coeff>
+                </fred:Conversion_Step>
+            </fred:Range>
+            <fred:Operational_Range>
+                <fred:RealRange_Start>-3.0</fred:RealRange_Start>
+                <fred:RealRange_End>3.0</fred:RealRange_End>
+            </fred:Operational_Range>
+            <smiths:Display_Format>F10.5</smiths:Display_Format>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Accel Long</fred:Name>
+            <fred:Mnemonic_Code>Nz</fred:Mnemonic_Code>
+            <fred:Additional_ID>111</fred:Additional_ID>
+            <fred:Modification_Date>2006-03-14T07:23:00-05:00</fred:Modification_Date>
+            <fred:Units>g</fred:Units>
+            <fred:Number_of_Bits>12</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>4095</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Signed Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Poly_Coeff>
+                        <fred:Coeff_Pair index="1">0.00655</fred:Coeff_Pair>
+                    </fred:Poly_Coeff>
+                </fred:Conversion_Step>
+            </fred:Range>
+            <fred:Operational_Range>
+                <fred:RealRange_Start>-3.0</fred:RealRange_Start>
+                <fred:RealRange_End>6.0</fred:RealRange_End>
+            </fred:Operational_Range>
+            <smiths:Display_Format>F10.5</smiths:Display_Format>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Some Nonlinear Parameter</fred:Name>
+            <fred:Modification_Date>2006-03-17T11:40:00-05:00</fred:Modification_Date>
+            <fred:Comments>This is an example of a parameter that uses an Integer-Real lookup table</fred:Comments>
+            <fred:Number_of_Bits>8</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>255</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Unsigned Binary</fred:Data_Type><fred:Conversion_Step>
+                    <fred:Integer_Real_Table>
+                        <fred:Integer_Real_Pair index="0">-25.8</fred:Integer_Real_Pair>
+                        <fred:Integer_Real_Pair index="75">-5.2</fred:Integer_Real_Pair>
+                        <fred:Integer_Real_Pair index="115">0.0</fred:Integer_Real_Pair>
+                        <fred:Integer_Real_Pair index="160">7.6</fred:Integer_Real_Pair>
+                        <fred:Integer_Real_Pair index="255">29.3</fred:Integer_Real_Pair>
+                    </fred:Integer_Real_Table>
+                </fred:Conversion_Step>
+            </fred:Range>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>Sample Conversion Description Parameter</fred:Name>
+            <fred:Modification_Date>2006-03-17T11:51:00-05:00</fred:Modification_Date>
+            <fred:Number_of_Bits>16</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>65535</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Unsigned Binary</fred:Data_Type>
+                <fred:Conversion_Step>
+                    <fred:Conversion_Description> Use the equation Param= (cnts) * A1
+                                                                 If MFD_1 is 0, A1 is 1
+                                                                 If MDF_1 is 1, A1 is 4.5
+                                                                 If MDF_1 is 2, A1 is 10
+                     </fred:Conversion_Description>
+                </fred:Conversion_Step>
+            </fred:Range>
+        </fred:Parameter767>
+        <fred:Parameter767>
+            <fred:Name>MFD_1</fred:Name>
+            <fred:Modification_Date>2006-03-17T14:34:00-05:00</fred:Modification_Date>
+            <fred:Number_of_Bits>2</fred:Number_of_Bits>
+            <fred:Range>
+                <fred:Raw_Range>
+                    <fred:IntRange_Start>0</fred:IntRange_Start>
+                    <fred:IntRange_End>3</fred:IntRange_End>
+                </fred:Raw_Range>
+                <fred:Data_Type>Unsigned Binary</fred:Data_Type>
+                <fred:Text_Conversion>
+                    <fred:Range_Text_Pair min="0" max="0">IRS 1</fred:Range_Text_Pair>
+                    <fred:Range_Text_Pair min="1" max="1">IRS 2</fred:Range_Text_Pair>
+                    <fred:Range_Text_Pair min="2" max="2">IRS 3</fred:Range_Text_Pair>
+                    <fred:Range_Text_Pair min="3" max="3">N/A</fred:Range_Text_Pair>
+                </fred:Text_Conversion>
+            </fred:Range>
+        </fred:Parameter767>
+        <smiths:User_Defined_FRED767_Element>This is an example of a user defined element for the FRED767 section to demonstrate where it would be inserted.</smiths:User_Defined_FRED767_Element>
+    </fred:FRED767>
+</fred:FREDFile>
